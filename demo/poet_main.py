@@ -22,6 +22,7 @@ if __name__ == '__main__':
 
         num, values = q2s.get_resukt(question)
         if values is not None:
+            print("log: 匹配规则", num)
             query = es.query_search(values)
             results = es.get_result(num, query)
             if len(results):

@@ -89,7 +89,14 @@ class Question:
         query = None
         for w in word_objects:
             if w.pos == pos_poem:
-                query = {"query": {"bool": {"must": [{"query_string": {"default_field": "name", "query": w.token}}]}}, "size": 5}
+                # query = {"query": {"bool": {"must": [{"query_string": {"default_field": "name", "query": w.token}}]}}, "size": 5}
+                # query = {"query": {"bool": {"must": [{"match_phrase": {"name": w.token}}]}}, "size": 5}
+                # query = {"query": {"bool": {"must": [{"query_string": {"query": "name:\""+w.token+"\""}}]}},
+                #          "size": 5}
+                query = {"query": {"bool": {"must": [{"query_string": {"default_field": "name",
+                                                                       "query": "\""+w.token+"\"",
+                                                                       }}]}},
+                         "size": 5}
                 break
 
         return query

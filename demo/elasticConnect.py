@@ -38,4 +38,7 @@ class ElasticConnect:
                 value = hit['_source']['dynasty']
                 values.append(value)
 
-        return list(set(values))
+        values_set = []
+        [values_set.append(x) for x in values if x not in values_set]  # 保留排序，不去重
+        return values_set
+        # return list(set(values))
